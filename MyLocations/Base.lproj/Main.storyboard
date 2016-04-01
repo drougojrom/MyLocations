@@ -61,7 +61,7 @@
                                 <state key="normal" title="Tag Location"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="fIF-JF-Py1">
-                                <rect key="frame" x="116" y="431" width="88" height="30"/>
+                                <rect key="frame" x="20" y="431" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Get Location"/>
                                 <connections>
