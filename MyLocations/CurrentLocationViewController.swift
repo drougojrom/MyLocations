@@ -11,6 +11,8 @@ import CoreLocation
 
 class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate {
     
+    // MARK : - Outlets
+    
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var latitudeLabel: UILabel!
     @IBOutlet weak var longitudeLabel: UILabel!
@@ -18,7 +20,9 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     @IBOutlet weak var tagButton: UIButton!
     @IBOutlet weak var getButton: UIButton!
     
-    let locatinManager = CLLocationManager()
+    // var and let
+    let locationManager = CLLocationManager()
+    var location: CLLocation?
     
     @IBAction func getLocation(){
         
@@ -29,12 +33,30 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             return
         }
         
-        locatinManager.delegate = self
-        locatinManager.desiredAccuracy = kCLLocationAccuracyBest
-        locatinManager.startUpdatingLocation()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
         
     }
+    // MARK : - update labels
+    func updateLabels(){
+        if let location = location {
+            latitudeLabel.text = String(format: "%.8f", location.coordinate.latitude)
+            longitudeLabel.text = String(format: "%.8f", location.coordinate.longitude)
+            
+            tagButton.hidden = false
+            messageLabel.text = ""
+        } else {
+            latitudeLabel.text = ""
+            longitudeLabel.text = ""
+            
+            tagButton.hidden = true
+            messageLabel.text = "Tap 'Get Location' to start"
+        }
+    }
     
+    
+    // more user- friendly alert
     func showLocationServiceDeniedAlert(){
         let alert = UIAlertController(title: "Location service disabled", message: "Please activate location service for this app in Settings", preferredStyle: .Alert)
         let okAction = UIAlertAction(title: "Ok", style: .Default, handler: nil)
@@ -46,6 +68,8 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        updateLabels()
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,6 +85,9 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let newLocation = locations.last!
         print("Updated location \(newLocation)")
+        
+        location = newLocation
+        updateLabels()
     }
 
 
