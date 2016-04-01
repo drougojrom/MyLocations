@@ -23,6 +23,8 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     // var and let
     let locationManager = CLLocationManager()
     var location: CLLocation?
+    var updatingLocation = false
+    var lastLocationError: NSError?
     
     @IBAction func getLocation(){
         
@@ -33,9 +35,8 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             return
         }
         
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.startUpdatingLocation()
+        startLocationManager()
+        updateLabels()
         
     }
     // MARK : - update labels
@@ -52,7 +53,26 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             
             tagButton.hidden = true
             messageLabel.text = "Tap 'Get Location' to start"
-        }
+            
+            // show that app is trying to obtain a location fix
+            
+            let statusMessage: String
+            if let error = lastLocationError {
+                if error.domain == kCLErrorDomain && error.code == CLError.Denied.rawValue {
+                    statusMessage = "Location Services Disabled"
+                } else {
+                    statusMessage = "Error Getting Location"
+                }
+            } else if !CLLocationManager.locationServicesEnabled() {
+                statusMessage = "Location service disabled"
+            } else if updatingLocation {
+                statusMessage = "Searching..."
+            } else {
+                statusMessage = "Tap 'Get Location' to start"
+            }
+            
+            messageLabel.text = statusMessage
+        } 
     }
     
     
@@ -63,6 +83,25 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         
         alert.addAction(okAction)
         presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func startLocationManager(){
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+            updatingLocation = true
+        }
+        
+    }
+    
+    // stop updating locations
+    func stopLocationManager(){
+        if updatingLocation {
+            locationManager.stopUpdatingLocation()
+            locationManager.delegate = nil
+            updatingLocation = false
+        }
     }
 
     override func viewDidLoad() {
@@ -80,6 +119,14 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     // MARK : - CLLocationManagerDelegate
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         print("Did fail with error \(error)")
+        
+        if error.code == CLError.LocationUnknown.rawValue {
+            return
+        }
+        
+        lastLocationError = nil
+        stopLocationManager()
+        updateLabels()
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
