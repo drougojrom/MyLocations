@@ -45,6 +45,8 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         } else {
             location = nil
             lastLocationError = nil
+            placemark = nil
+            lastGeocodingError = nil
             startLocationManager()
         }
         updateLabels()
@@ -99,20 +101,20 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     }
     
     func stringFromPlacemark(placemark: CLPlacemark) -> String {
-        // 1 -
+        // 1 - create a var for first line text
         var line1 = " "
         
-        // 2 -
-        if let placemark.subThoroughfare {
+        // 2 - additional to name
+        if let s = placemark.subThoroughfare {
             line1 += s + " "
         }
         
-        // 3 -
+        // 3 - name
         if let s = placemark.thoroughfare {
             line1 += s
         }
         
-        // 4 -
+        // 4 - the same as 1 - 3
         
         var line2 = ""
         
@@ -128,7 +130,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             line2 += s
         }
         
-        // 5 -
+        // 5 - add them together
         return line1 + "\n" + line2
     }
     
