@@ -133,10 +133,29 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         let newLocation = locations.last!
         print("Updated location \(newLocation)")
         
-        location = newLocation
-        updateLabels()
-    }
-
-
+        // 1 - if location was taken long ago (5 sec), ignore it
+        if newLocation.timestamp.timeIntervalSinceNow < -5 {
+            return
+        }
+        
+        // 2 - determine whether new readings are more accurate, use horizontal accuracy
+        if newLocation.horizontalAccuracy < 0 {
+            return
+        }
+        
+        if location == nil ||
+            location!.horizontalAccuracy > newLocation.horizontalAccuracy {
+                // 4 - check new location
+                lastLocationError = nil
+                location = newLocation
+                updateLabels()
+            
+            // 5 - check for desired accuracy
+            if newLocation.horizontalAccuracy <= locationManager.desiredAccuracy {
+                print("We are done!")
+                stopLocationManager()
+                }
+            }
+        }
 }
 
