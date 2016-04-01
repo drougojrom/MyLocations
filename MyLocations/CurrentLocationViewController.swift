@@ -25,6 +25,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     var location: CLLocation?
     var updatingLocation = false
     var lastLocationError: NSError?
+    var timer: NSTimer?
     
     let geocoder = CLGeocoder()
     var placemark: CLPlacemark?
@@ -203,6 +204,11 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         if newLocation.horizontalAccuracy < 0 {
             return
         }
+        // calculates distance between new reading and previous reading
+        var distance = CLLocationDistance(DBL_MAX)
+        if let location = location {
+            distance = newLocation.distanceFromLocation(location)
+        }
         
         if location == nil ||
             location!.horizontalAccuracy > newLocation.horizontalAccuracy {
@@ -216,6 +222,11 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
                 print("We are done!")
                 stopLocationManager()
                 configureGetButton()
+                
+                // done recording for this destination
+                if distance > 0 {
+                    performingReverseGeocoding = false
+                }
             }
             
             performingReverseGeocoding = true
@@ -235,6 +246,15 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
                 self.updateLabels()
                 
             })
+            // stop if 10 seconds passed
+        } else if distance < 1.0 {
+            let timeInterval = newLocation.timestamp.timeIntervalSinceDate(location!.timestamp)
+            if timeInterval > 10 {
+                print("Force done!")
+                stopLocationManager()
+                updateLabels()
+                configureGetButton()
+            }
         }
     }
     
