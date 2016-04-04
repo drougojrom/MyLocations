@@ -219,6 +219,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="te1-kF-dAW" kind="presentation" trigger="accessoryAction" id="qJf-BT-da6"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="aNS-hw-mZI" detailTextLabel="BIn-OO-ex6" style="IBUITableViewCellStyleValue1" id="8ys-Gt-1AZ">
                                         <rect key="frame" x="0.0" y="405.5" width="600" height="44"/>
@@ -245,25 +248,39 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="SFs-pa-UDh">
-                                        <rect key="frame" x="0.0" y="449.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="450" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SFs-pa-UDh" id="4ur-t8-bie">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Urx-a3-UFo">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Urx-a3-UFo">
                                                     <rect key="frame" x="15" y="11" width="75" height="22"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="75" id="cqb-AH-f1Z"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0U-Av-9lX">
-                                                    <rect key="frame" x="543" y="12" width="44" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0U-Av-9lX">
+                                                    <rect key="frame" x="354" y="6" width="230" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="230" id="gLb-1l-BSX"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Urx-a3-UFo" firstAttribute="centerY" secondItem="W0U-Av-9lX" secondAttribute="centerY" constant="1" id="EhC-MQ-Y0S"/>
+                                                <constraint firstItem="Urx-a3-UFo" firstAttribute="leading" secondItem="4ur-t8-bie" secondAttribute="leadingMargin" constant="7" id="G3W-do-UXu"/>
+                                                <constraint firstItem="Urx-a3-UFo" firstAttribute="centerY" secondItem="4ur-t8-bie" secondAttribute="centerY" id="NLl-kl-QqZ"/>
+                                                <constraint firstItem="Urx-a3-UFo" firstAttribute="baseline" secondItem="W0U-Av-9lX" secondAttribute="baseline" constant="-3" id="OTS-5N-VJz"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="W0U-Av-9lX" secondAttribute="trailing" constant="8" id="YaZ-SS-Xr6"/>
+                                                <constraint firstItem="Urx-a3-UFo" firstAttribute="top" secondItem="4ur-t8-bie" secondAttribute="topMargin" constant="3" id="kNJ-oI-xTs"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="FCw-NQ-HnA" detailTextLabel="DxY-2f-pvL" style="IBUITableViewCellStyleValue1" id="3Id-Qu-GPg">
@@ -311,17 +328,17 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addressLabel" destination="Urx-a3-UFo" id="9RD-Lo-3a8"/>
+                        <outlet property="addressLabel" destination="W0U-Av-9lX" id="L7g-wD-gQT"/>
                         <outlet property="categoryLabel" destination="dJi-lf-KGx" id="OaB-xA-elF"/>
                         <outlet property="dateLabel" destination="FCw-NQ-HnA" id="gGH-7R-P3i"/>
                         <outlet property="descriptionTextView" destination="HOD-aR-79e" id="p2H-hx-XjG"/>
-                        <outlet property="latitudeLabel" destination="qON-eL-QuP" id="gdz-vT-mJX"/>
-                        <outlet property="longitudeLabel" destination="aNS-hw-mZI" id="bGE-Gc-byT"/>
+                        <outlet property="latitudeLabel" destination="Qxw-wI-Bqp" id="seA-lQ-teG"/>
+                        <outlet property="longitudeLabel" destination="BIn-OO-ex6" id="FqT-Kc-wwn"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Re6-AM-JUj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2272" y="-321"/>
+            <point key="canvasLocation" x="2272" y="-313"/>
         </scene>
         <!--Second-->
         <scene sceneID="wg7-f3-ORb">
@@ -400,11 +417,14 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5kK-c3-WIb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1506" y="-321"/>
+            <point key="canvasLocation" x="1506" y="-313"/>
         </scene>
     </scenes>
     <resources>
         <image name="first" width="30" height="30"/>
         <image name="second" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="KyV-rr-cX0"/>
+    </inferredMetricsTieBreakers>
 </document>

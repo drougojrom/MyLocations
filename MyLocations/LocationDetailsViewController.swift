@@ -24,6 +24,15 @@ class LocationDetailsViewController: UITableViewController {
     var coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     var placemark : CLPlacemark?
     
+    // MARK: private var and let
+    
+    private let dateFormatter: NSDateFormatter = {
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = .MediumStyle
+        formatter.timeStyle = .ShortStyle
+        return formatter
+    }()
+    
     // MARK: @IBActions
     @IBAction func done(){
         dismissViewControllerAnimated(true, completion: nil)
@@ -33,10 +42,40 @@ class LocationDetailsViewController: UITableViewController {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    // MARK : func
+    // MARK : func's
     
+    // make string from placemark
     func stringFromPlacemark(placemark: CLPlacemark) -> String {
         
+        var text = ""
+        
+        if let s = placemark.subThoroughfare {
+            text += s + ", "
+        }
+        
+        if let s = placemark.thoroughfare {
+            text += s + ", "
+        }
+        
+        if let s = placemark.administrativeArea {
+            text += s + ", "
+        }
+        
+        if let s = placemark.postalCode {
+            text += s + ", "
+        }
+        
+        if let s = placemark.country {
+            text += s + ", "
+        }
+        
+        return text
+    }
+    
+    // formateDate method
+    
+    func formatDate(date: NSDate) -> String {
+        return dateFormatter.stringFromDate(date)
     }
     
     
@@ -58,5 +97,22 @@ class LocationDetailsViewController: UITableViewController {
         }
         
         dateLabel.text = formatDate(NSDate())
+    }
+    
+    // UITablewViewDelegate
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.section == 0 && indexPath.row == 0 {
+            return 88
+        } else if indexPath.section == 2 && indexPath.row == 2 {
+            addressLabel.frame.size = CGSize(width: view.bounds.size.width - 115, height: 10000)
+            addressLabel.sizeToFit()
+            addressLabel.frame.origin.x = view.bounds.size.width - addressLabel.frame.size.height + 20
+            
+            return addressLabel.frame.size.height + 20
+            
+        } else {
+            return 44
+        }
     }
 }
