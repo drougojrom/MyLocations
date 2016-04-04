@@ -266,6 +266,20 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         }
     }
     
+    // MARK : - timeOut function for good enough location
+    // always called after one minute
+    
+    func didTimeOut(){
+        print("Thime is out!")
+        
+        if location == nil {
+            stopLocationManager()
+            lastLocationError = NSError(domain: "MyLocationsErrorDomain", code: 1, userInfo: nil)
+            updateLabels()
+            configureGetButton()
+        }
+    }
+    
     // get-button func
     
     func configureGetButton(){
