@@ -7,11 +7,40 @@
 //
 
 import UIKit
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    lazy var managedObjectContext: NSManagedObjectContext = {
+        guard let modeURL = NSBundle.mainBundle().URLForResource("DataModel", withExtension: "momd") else {
+            fatalError("Could not find model in app bundle")
+        }
+        
+        guard let model = NSManagedObjectModel(contentsOfURL: modeURL) else {
+            fatalError("Unable to initialize mode from \(modeURL)")
+        }
+        
+        let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+        let documentDirectory = urls[0]
+        
+        let storeURL = documentDirectory.URLByAppendingPathComponent("DataStore.sqlite")
+        
+        do {
+            let coordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
+            
+            try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeURL, options: nil)
+            
+            let context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+            context.persistentStoreCoordinator = coordinator
+            return context
+        } catch {
+            fatalError("Error adding persistent store at \(storeURL): \(error) ")
+        }
+        
+    }()
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
