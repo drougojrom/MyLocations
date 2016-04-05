@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import Dispatch // library for asychronous tasks
 
 class LocationDetailsViewController: UITableViewController {
     
@@ -38,8 +39,15 @@ class LocationDetailsViewController: UITableViewController {
     @IBAction func done(){
         
         
-        let hudView = HudView.hudInView(navigationController!.view, aminated: true)
+        let hudView = HudView.hudInView(navigationController!.view, animated: true)
         hudView.text = "Tagged"
+        
+        let delayInSeconds = 0.6
+        let when = dispatch_time(DISPATCH_TIME_NOW, Int64(delayInSeconds * Double(NSEC_PER_SEC)))
+        dispatch_after(when, dispatch_get_main_queue(), {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        
+        })
     }
     
     @IBAction func cancel(){

@@ -12,8 +12,8 @@ class HudView: UIView {
     
     var text = ""
     
-    // convenience constructor
-    class func hudInView(view: UIView, aminated: Bool) -> HudView {
+    // MARK :convenience constructor
+    class func hudInView(view: UIView, animated: Bool) -> HudView {
         let hudView = HudView(frame: view.bounds)
         
         hudView.opaque = false
@@ -21,8 +21,28 @@ class HudView: UIView {
         view.addSubview(hudView)
         view.userInteractionEnabled = false
         
-        hudView.backgroundColor = UIColor(red: 1, green: 0, blue: 0, alpha: 0.5)
+        hudView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        hudView.showAnimated(animated)
         return hudView
+    }
+    
+    
+    // MARK: func's
+    
+    func showAnimated(animated: Bool) {
+        if animated {
+            // 1 - set up inital state of the view before animation
+            alpha = 1
+            transform = CGAffineTransformMakeScale(1.3, 1.3)
+            
+            //2 - call to set animation
+            UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: [], animations: {
+            // 3 - new state
+                self.alpha = 1
+                self.transform = CGAffineTransformIdentity
+            
+            }, completion: nil)
+        }
     }
     
     // MARK : override
