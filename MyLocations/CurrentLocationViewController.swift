@@ -152,7 +152,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             locationManager.startUpdatingLocation()
             updatingLocation = true
             
-            //timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: #selector(CurrentLocationViewController.didTimeOut), userInfo: nil, repeats: false)
+            timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("didTimeOut"), userInfo: nil, repeats: false)
         }
         
     }
@@ -160,15 +160,13 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     // stop updating locations
     func stopLocationManager(){
         if updatingLocation {
-            
+            locationManager.stopUpdatingLocation()
+            locationManager.delegate = nil
+            updatingLocation = false
             
             if let timer = timer {
                 timer.invalidate()
             }
-            
-            locationManager.stopUpdatingLocation()
-            locationManager.delegate = nil
-            updatingLocation = false
         }
     }
 

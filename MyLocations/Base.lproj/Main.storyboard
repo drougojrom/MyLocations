@@ -343,10 +343,10 @@
             </objects>
             <point key="canvasLocation" x="2272" y="-313"/>
         </scene>
-        <!--Category Picked View Controller-->
+        <!--Category Picker View Controller-->
         <scene sceneID="hwq-kV-tbz">
             <objects>
-                <tableViewController id="pB2-Qf-XzV" customClass="CategoryPickedViewController" customModule="MyLocations" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="pB2-Qf-XzV" customClass="CategoryPickerViewController" customModule="MyLocations" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="NMc-L6-cU9">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -369,7 +369,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="Cv0-eo-VhR" kind="unwind" unwindAction="categoryPickerDidPickCategory:" id="UOn-do-cU5"/>
+                                    <segue destination="Cv0-eo-VhR" kind="unwind" identifier="PickedCategory" unwindAction="categoryPickerDidPickCategory:" id="vsS-Q7-avK"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

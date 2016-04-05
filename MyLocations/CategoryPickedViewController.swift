@@ -8,14 +8,14 @@
 
 import UIKit
 
-class CategoryPickedViewController: UITableViewController {
+class CategoryPickerViewController: UITableViewController {
     
     // MARK : var and let
     
     var selectedCategoryName = ""
     
     let categories = [
-        "No category",
+        "No Category",
         "Apple Store",
         "Bar",
         "Bookstore",
@@ -25,8 +25,7 @@ class CategoryPickedViewController: UITableViewController {
         "House",
         "Icecream Vendor",
         "Landmark",
-        "Park"
-    ]
+        "Park"]
     
     
     var selectedIndexPath = NSIndexPath()
@@ -38,7 +37,7 @@ class CategoryPickedViewController: UITableViewController {
     
     // MARK : override func
     
-    override func viewDidLoad(){
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         for i in 0..<categories.count {
@@ -61,7 +60,7 @@ class CategoryPickedViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         
         let categoryName = categories[indexPath.row]
-        cell.textLabel?.text = categoryName
+        cell.textLabel!.text = categoryName
         
         if categoryName == selectedCategoryName {
             cell.accessoryType = .Checkmark
@@ -80,7 +79,7 @@ class CategoryPickedViewController: UITableViewController {
                 newCell.accessoryType = .Checkmark
             }
             
-            if let oldCell = tableView.cellForRowAtIndexPath(indexPath) {
+            if let oldCell = tableView.cellForRowAtIndexPath(selectedIndexPath) {
                 oldCell.accessoryType = .None
             }
             
@@ -88,5 +87,14 @@ class CategoryPickedViewController: UITableViewController {
         }
     }
     
+    // segue for filling selectedCtagoryName
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "PickedCategory" {
+            let cell = sender as! UITableViewCell
+            if let indexPath = tableView.indexPathForCell(cell) {
+                selectedCategoryName = categories[indexPath.row]
+            }
+        }
+    }
     
 }

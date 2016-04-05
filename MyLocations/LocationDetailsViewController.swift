@@ -43,8 +43,8 @@ class LocationDetailsViewController: UITableViewController {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    @IBAction func categoryPickerDidPickCategory(segue: UIStoryboardSegue){
-        let controller = segue.destinationViewController as! CategoryPickedViewController
+    @IBAction func categoryPickerDidPickCategory(segue: UIStoryboardSegue) {
+        let controller = segue.sourceViewController as! CategoryPickerViewController
         categoryName = controller.selectedCategoryName
         categoryLabel.text = categoryName
     }
@@ -111,11 +111,11 @@ class LocationDetailsViewController: UITableViewController {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0 && indexPath.row == 0 {
             return 88
+            
         } else if indexPath.section == 2 && indexPath.row == 2 {
             addressLabel.frame.size = CGSize(width: view.bounds.size.width - 115, height: 10000)
             addressLabel.sizeToFit()
-            addressLabel.frame.origin.x = view.bounds.size.width - addressLabel.frame.size.height + 20
-            
+            addressLabel.frame.origin.x = view.bounds.size.width - addressLabel.frame.size.width - 15
             return addressLabel.frame.size.height + 20
             
         } else {
@@ -124,8 +124,8 @@ class LocationDetailsViewController: UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "PickCategory"{
-            let controller = segue.destinationViewController as! CategoryPickedViewController
+        if segue.identifier == "PickCategory" {
+            let controller = segue.destinationViewController as! CategoryPickerViewController
             controller.selectedCategoryName = categoryName
         }
     }
