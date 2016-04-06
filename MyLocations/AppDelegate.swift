@@ -13,30 +13,35 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
+    // creating NSManagedObjectContext
     lazy var managedObjectContext: NSManagedObjectContext = {
+        
+        // 1 - create NSURL pointing to a folder, which points on my DataModel.momd file
         guard let modeURL = NSBundle.mainBundle().URLForResource("DataModel", withExtension: "momd") else {
             fatalError("Could not find model in app bundle")
         }
         
+        // 2 - create an NSManagedObjectModel from that URL
         guard let model = NSManagedObjectModel(contentsOfURL: modeURL) else {
             fatalError("Unable to initialize mode from \(modeURL)")
         }
         
+        // 3 - create an object pointing to DataStore.sqlite file
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
         let documentDirectory = urls[0]
         
         let storeURL = documentDirectory.URLByAppendingPathComponent("DataStore.sqlite")
-        
+        print(storeURL)
         do {
+            // 4 - creating an object which is in charge of SQLite databese
             let coordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
-            
+            // 5 - add SQLite database to the store coordinator
             try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeURL, options: nil)
-            
+            // 6 - create NSManagedObjectContext object and return it
             let context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
             context.persistentStoreCoordinator = coordinator
             return context
-        } catch {
+        } catch { // 7 - catch an error; just in case
             fatalError("Error adding persistent store at \(storeURL): \(error) ")
         }
         
@@ -45,6 +50,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let tabBarController = window!.rootViewController as! UITabBarController
+        
+        if let tabBarViewControllers = tabBarController.viewControllers {
+            let currentLocationViewController = tabBarViewControllers[0] as! CurrentLocationViewController
+            
+            currentLocationViewController.managedObjectContext = managedObjectContext
+        }
+        
+        
         return true
     }
 

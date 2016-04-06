@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import Dispatch // library for asychronous tasks
+import CoreData
 
 class LocationDetailsViewController: UITableViewController {
     
@@ -25,6 +26,8 @@ class LocationDetailsViewController: UITableViewController {
     var coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     var placemark : CLPlacemark?
     var categoryName = "No Category"
+    var managedObjectContext: NSManagedObjectContext!
+    var date = NSDate()
     
     // MARK: private var and let
     
@@ -41,6 +44,26 @@ class LocationDetailsViewController: UITableViewController {
         
         let hudView = HudView.hudInView(navigationController!.view, animated: true)
         hudView.text = "Tagged"
+        
+        // 1 - create a new location object from CoreData
+        let location = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: managedObjectContext) as! Location
+        
+        // 2 - proprietes for object
+        location.locationDescription = descriptionTextView.text
+        location.category = categoryName
+        location.latitude = coordinate.latitude
+        location.longitude = coordinate.longitude
+        location.placemark = placemark
+        location.date = date
+        
+        // 3 - save new modified object
+        
+        do {
+            try managedObjectContext.save()
+        } catch let error {
+            fatalError("Unable to save: \(error)")
+        }
+        
         
         afterDelay(0.6, closure: {
             self.dismissViewControllerAnimated(true, completion: nil)
@@ -123,7 +146,7 @@ class LocationDetailsViewController: UITableViewController {
             addressLabel.text = "No Address found"
         }
         
-        dateLabel.text = formatDate(NSDate())
+        dateLabel.text = formatDate(date)
         
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("hideKeyboard:"))
         gestureRecognizer.cancelsTouchesInView = false
