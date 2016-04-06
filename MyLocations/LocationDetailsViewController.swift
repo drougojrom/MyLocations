@@ -60,8 +60,8 @@ class LocationDetailsViewController: UITableViewController {
         
         do {
             try managedObjectContext.save()
-        } catch let error {
-            fatalError("Unable to save: \(error)")
+        } catch {
+            fatalCoreDataError(error)
         }
         
         

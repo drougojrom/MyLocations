@@ -9,8 +9,48 @@
 import UIKit
 import CoreData
 
+let MyManagedObjectContextSaveDidFailNotification = "MyManagedObjectContextSaveDidFailNotification"
+func fatalCoreDataError(error: ErrorType) {
+    print("Fatal Error: \(error)")
+    NSNotificationCenter.defaultCenter().postNotificationName(MyManagedObjectContextSaveDidFailNotification, object: nil)
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    func listenForFatalCoreDataNotofications(){
+        // 1 - tell NSNotificationCenter that you want to be notified
+        NSNotificationCenter.defaultCenter().addObserverForName(MyManagedObjectContextSaveDidFailNotification, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { notification in
+            
+            // 2 - create a UIAlert to show error message
+            let alert = UIAlertController(title: "Internal error", message: "There was a fatal error in the app and it can not continue.\n\n" + "Press OK to terminate the App. Sorry for inconvenience", preferredStyle: .Alert)
+            
+            // 3 - add an action to button
+            let action = UIAlertAction(title: "OK", style: .Default, handler: { _ in
+            
+                let exeption = NSException(name: NSInternalInconsistencyException, reason: "Fatal CoreData Error", userInfo: nil)
+                exeption.raise()
+                
+            })
+            
+            alert.addAction(action)
+            
+            // 4 - present alert
+            self.viewControllerForShowingAlert().presentViewController(alert, animated: true, completion: nil)
+        
+        })
+    }
+    
+    // 5 - to present alert we need a viewController, which is visible, this func helps us in it
+    
+    func viewControllerForShowingAlert() -> UIViewController {
+        let rootViewController = self.window!.rootViewController!
+        if let presentedViewController = rootViewController.presentedViewController {
+            return presentedViewController
+        } else {
+            return rootViewController
+        }
+    }
 
     var window: UIWindow?
     // creating NSManagedObjectContext
@@ -59,7 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             currentLocationViewController.managedObjectContext = managedObjectContext
         }
         
-        
+        listenForFatalCoreDataNotofications()
         return true
     }
 
