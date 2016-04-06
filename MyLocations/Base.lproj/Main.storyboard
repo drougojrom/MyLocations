@@ -433,7 +433,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationCell" rowHeight="75" id="KWD-37-s6i">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationCell" rowHeight="75" id="KWD-37-s6i" customClass="LocationCell" customModule="MyLocations">
                                 <rect key="frame" x="0.0" y="92" width="600" height="75"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KWD-37-s6i" id="Ft9-bO-KDA">
@@ -465,6 +465,10 @@
                                         <constraint firstItem="Ax6-73-XK8" firstAttribute="trailing" secondItem="3HW-wx-6sr" secondAttribute="trailing" id="hfb-q9-tMT"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="addressLabel" destination="3HW-wx-6sr" id="9T0-EK-dMv"/>
+                                    <outlet property="descriptionLabel" destination="Ax6-73-XK8" id="ck1-QD-5Zb"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
