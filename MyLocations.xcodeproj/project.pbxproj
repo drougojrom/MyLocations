@@ -20,6 +20,7 @@
 		30A3A3F11CAE640300B0DB5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30A3A3EF1CAE640300B0DB5B /* Main.storyboard */; };
 		30A3A3F31CAE640300B0DB5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30A3A3F21CAE640300B0DB5B /* Assets.xcassets */; };
 		30A3A3F61CAE640300B0DB5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30A3A3F41CAE640300B0DB5B /* LaunchScreen.storyboard */; };
+		30DAF0441CB509DE00271C23 /* LocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DAF0431CB509DE00271C23 /* LocationsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		30A3A3F21CAE640300B0DB5B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		30A3A3F51CAE640300B0DB5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		30A3A3F71CAE640300B0DB5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		30DAF0431CB509DE00271C23 /* LocationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 				30257A5A1CB29A2C00092621 /* CategoryPickedViewController.swift */,
 				30A3A3ED1CAE640200B0DB5B /* SecondViewController.swift */,
 				30A3A3EF1CAE640300B0DB5B /* Main.storyboard */,
+				30DAF0431CB509DE00271C23 /* LocationsViewController.swift */,
 				3054CEB81CB3C17400F7B431 /* HudView.swift */,
 				3054CEBA1CB3E07D00F7B431 /* Functions.swift */,
 				30A3A3F21CAE640300B0DB5B /* Assets.xcassets */,
@@ -164,6 +167,7 @@
 				3054CEBE1CB3EC1200F7B431 /* DataModel.xcdatamodeld in Sources */,
 				3054CEC21CB3EDF900F7B431 /* Location.swift in Sources */,
 				30A3A3EE1CAE640200B0DB5B /* SecondViewController.swift in Sources */,
+				30DAF0441CB509DE00271C23 /* LocationsViewController.swift in Sources */,
 				3054CEB91CB3C17400F7B431 /* HudView.swift in Sources */,
 				3054CEBB1CB3E07D00F7B431 /* Functions.swift in Sources */,
 				3054CEC11CB3EDF900F7B431 /* Location+CoreDataProperties.swift in Sources */,
