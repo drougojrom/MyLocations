@@ -55,10 +55,20 @@ class LocationDetailsViewController: UITableViewController {
         
         
         let hudView = HudView.hudInView(navigationController!.view, animated: true)
-        hudView.text = "Tagged"
         
+        let location: Location
+        
+        if let temp = locationToEdit {
+            
+            hudView.text = "Updated"
+            location = temp
+        } else {
+            
+            hudView.text = "Tagged"
         // 1 - create a new location object from CoreData
-        let location = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: managedObjectContext) as! Location
+            location = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: managedObjectContext) as! Location
+        
+        }
         
         // 2 - proprietes for object
         location.locationDescription = descriptionTextView.text
