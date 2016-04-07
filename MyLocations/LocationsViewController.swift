@@ -109,7 +109,7 @@ extension LocationsViewController: NSFetchedResultsControllerDelegate {
             tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
         case .Update:
             print("NSFetchedResultsChangeUpdate (object)")
-            if let cell = tableView.cellForRowAtIndexPath(indexPath!) {
+            if let cell = tableView.cellForRowAtIndexPath(indexPath!) as? LocationCell {
                 let location = controller.objectAtIndexPath(indexPath!) as! Location
                 cell.configureForLocation(location)
             }
