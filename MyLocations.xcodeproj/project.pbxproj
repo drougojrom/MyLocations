@@ -23,6 +23,7 @@
 		30DAF0441CB509DE00271C23 /* LocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DAF0431CB509DE00271C23 /* LocationsViewController.swift */; };
 		30DAF0481CB51F4000271C23 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DAF0471CB51F4000271C23 /* LocationCell.swift */; };
 		30DDA5CA1CB68ECE008B9D9D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30DDA5C91CB68ECE008B9D9D /* MapKit.framework */; };
+		30DDA5CC1CB694A7008B9D9D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DDA5CB1CB694A7008B9D9D /* MapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		30DAF0431CB509DE00271C23 /* LocationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsViewController.swift; sourceTree = "<group>"; };
 		30DAF0471CB51F4000271C23 /* LocationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationCell.swift; path = ../LocationCell.swift; sourceTree = "<group>"; };
 		30DDA5C91CB68ECE008B9D9D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		30DDA5CB1CB694A7008B9D9D /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				30257A5A1CB29A2C00092621 /* CategoryPickedViewController.swift */,
 				30A3A3ED1CAE640200B0DB5B /* SecondViewController.swift */,
 				30A3A3EF1CAE640300B0DB5B /* Main.storyboard */,
+				30DDA5CB1CB694A7008B9D9D /* MapViewController.swift */,
 				30DAF0431CB509DE00271C23 /* LocationsViewController.swift */,
 				3054CEB81CB3C17400F7B431 /* HudView.swift */,
 				3054CEBA1CB3E07D00F7B431 /* Functions.swift */,
@@ -176,6 +179,7 @@
 				30A3A3EE1CAE640200B0DB5B /* SecondViewController.swift in Sources */,
 				30DAF0441CB509DE00271C23 /* LocationsViewController.swift in Sources */,
 				3054CEB91CB3C17400F7B431 /* HudView.swift in Sources */,
+				30DDA5CC1CB694A7008B9D9D /* MapViewController.swift in Sources */,
 				30DAF0481CB51F4000271C23 /* LocationCell.swift in Sources */,
 				3054CEBB1CB3E07D00F7B431 /* Functions.swift in Sources */,
 				3054CEC11CB3EDF900F7B431 /* Location+CoreDataProperties.swift in Sources */,

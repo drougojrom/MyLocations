@@ -499,7 +499,7 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WtX-83-iQj">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                             </mapView>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W54-zd-LRZ">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W54-zd-LRZ">
                                 <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <items>
                                     <navigationItem title="Map" id="Djl-pK-apy">
@@ -512,8 +512,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="WtX-83-iQj" secondAttribute="trailing" id="3vA-Xw-kdo"/>
+                            <constraint firstItem="W54-zd-LRZ" firstAttribute="leading" secondItem="WtX-83-iQj" secondAttribute="leading" id="Q6I-MW-Ec8"/>
                             <constraint firstItem="WtX-83-iQj" firstAttribute="leading" secondItem="UlG-QL-x8C" secondAttribute="leading" id="Wu9-6j-3vv"/>
                             <constraint firstItem="WtX-83-iQj" firstAttribute="top" secondItem="UlG-QL-x8C" secondAttribute="top" id="pd5-xW-sRe"/>
+                            <constraint firstItem="W54-zd-LRZ" firstAttribute="trailing" secondItem="WtX-83-iQj" secondAttribute="trailing" id="uzc-A9-h8X"/>
+                            <constraint firstItem="W54-zd-LRZ" firstAttribute="top" secondItem="Ndd-2u-vwc" secondAttribute="bottom" constant="8" id="wcg-gZ-h5P"/>
                             <constraint firstItem="WtX-83-iQj" firstAttribute="bottom" secondItem="VTc-zA-qAp" secondAttribute="top" id="xVh-rx-BDh"/>
                         </constraints>
                     </view>
