@@ -22,6 +22,7 @@
 		30A3A3F61CAE640300B0DB5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30A3A3F41CAE640300B0DB5B /* LaunchScreen.storyboard */; };
 		30DAF0441CB509DE00271C23 /* LocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DAF0431CB509DE00271C23 /* LocationsViewController.swift */; };
 		30DAF0481CB51F4000271C23 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DAF0471CB51F4000271C23 /* LocationCell.swift */; };
+		30DDA5CA1CB68ECE008B9D9D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30DDA5C91CB68ECE008B9D9D /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		30A3A3F71CAE640300B0DB5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30DAF0431CB509DE00271C23 /* LocationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsViewController.swift; sourceTree = "<group>"; };
 		30DAF0471CB51F4000271C23 /* LocationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationCell.swift; path = ../LocationCell.swift; sourceTree = "<group>"; };
+		30DDA5C91CB68ECE008B9D9D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30DDA5CA1CB68ECE008B9D9D /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +61,7 @@
 		30A3A3DD1CAE640200B0DB5B = {
 			isa = PBXGroup;
 			children = (
+				30DDA5C91CB68ECE008B9D9D /* MapKit.framework */,
 				30A3A3E81CAE640200B0DB5B /* MyLocations */,
 				30A3A3E71CAE640200B0DB5B /* Products */,
 			);

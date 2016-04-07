@@ -400,6 +400,7 @@
                     <connections>
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="2iM-xY-69V" kind="relationship" relationship="viewControllers" id="1OQ-De-yXe"/>
+                        <segue destination="0iT-Fk-Jtu" kind="relationship" relationship="viewControllers" id="i2I-8g-hbE"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -482,6 +483,45 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NA0-sQ-doX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1246" y="938"/>
+        </scene>
+        <!--Map-->
+        <scene sceneID="GHN-Sw-T5P">
+            <objects>
+                <viewController id="0iT-Fk-Jtu" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ndd-2u-vwc"/>
+                        <viewControllerLayoutGuide type="bottom" id="VTc-zA-qAp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UlG-QL-x8C">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WtX-83-iQj">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                            </mapView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W54-zd-LRZ">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Map" id="Djl-pK-apy">
+                                        <barButtonItem key="leftBarButtonItem" title="Locations" id="tth-9O-JbC"/>
+                                        <barButtonItem key="rightBarButtonItem" title="User" id="V2c-5c-xo9"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="WtX-83-iQj" secondAttribute="trailing" id="3vA-Xw-kdo"/>
+                            <constraint firstItem="WtX-83-iQj" firstAttribute="leading" secondItem="UlG-QL-x8C" secondAttribute="leading" id="Wu9-6j-3vv"/>
+                            <constraint firstItem="WtX-83-iQj" firstAttribute="top" secondItem="UlG-QL-x8C" secondAttribute="top" id="pd5-xW-sRe"/>
+                            <constraint firstItem="WtX-83-iQj" firstAttribute="bottom" secondItem="VTc-zA-qAp" secondAttribute="top" id="xVh-rx-BDh"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Map" id="4xC-sD-OQh"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Guu-fd-yYh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-250" y="938"/>
         </scene>
         <!--Locations-->
         <scene sceneID="dSi-dL-QrZ">
