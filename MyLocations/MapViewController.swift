@@ -104,6 +104,20 @@ class MapViewController: UIViewController {
         }
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "EditLocation" {
+            
+            let navigationController = segue.destinationViewController as! UINavigationController
+            let controller = navigationController.topViewController as! LocationDetailsViewController
+            controller.managedObjectContext = managedObjectContext
+            
+            let button = sender as! UIButton
+            let location = locations[button.tag]
+            
+            controller.locationToEdit = location
+        }
+    }
+    
     
 }
 
@@ -134,7 +148,7 @@ extension MapViewController : MKMapViewDelegate {
             // 4 - button for location details
             let rightButton = UIButton(type: .DetailDisclosure)
             rightButton.addTarget(self,
-                                  action: Selector("ShowLocationDetails:"),
+                                  action: Selector("showLocationDetails:"),
                                   forControlEvents: .TouchUpInside)
             annotationView.rightCalloutAccessoryView = rightButton
         } else {
@@ -149,12 +163,10 @@ extension MapViewController : MKMapViewDelegate {
         return annotationView
     }
     
-    
-    
-    
-    
-    
-    
-
+    func showLocationDetails(sender: UIButton){
+        
+        performSegueWithIdentifier("EditLocation", sender: sender)
+        
+    }
 
 }
