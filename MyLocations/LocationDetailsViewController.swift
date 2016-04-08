@@ -223,6 +223,29 @@ class LocationDetailsViewController: UITableViewController {
 }
 
 extension LocationDetailsViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func pickPhoto(){
+        if UIImagePickerController.isSourceTypeAvailable(.Camera) {
+            showPhotoMenu()
+        } else {
+            choosePhotoFromLibrary()
+        }
+    }
+    
+    func showPhotoMenu(){
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        let takePhotoAction = UIAlertAction(title: "Take Photo", style: .Default, handler: nil)
+        
+        alertController.addAction(takePhotoAction)
+        
+        let chooseFromLibraryAction = UIAlertAction(title: "Choose From Library", style: .Cancel, handler: nil)
+        alertController.addAction(chooseFromLibraryAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
 
     func takePhotoWithCamera(){
         let imagePicker = UIImagePickerController()
@@ -233,7 +256,11 @@ extension LocationDetailsViewController : UIImagePickerControllerDelegate, UINav
     }
     
     func choosePhotoFromLibrary(){
-        
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = .PhotoLibrary
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+        presentViewController(imagePicker, animated: true, completion: nil)
     }
     
     
