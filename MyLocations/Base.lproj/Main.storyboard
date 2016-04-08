@@ -487,7 +487,7 @@
         <!--Map-->
         <scene sceneID="GHN-Sw-T5P">
             <objects>
-                <viewController id="0iT-Fk-Jtu" sceneMemberID="viewController">
+                <viewController id="0iT-Fk-Jtu" customClass="MapViewController" customModule="MyLocations" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ndd-2u-vwc"/>
                         <viewControllerLayoutGuide type="bottom" id="VTc-zA-qAp"/>
@@ -503,8 +503,16 @@
                                 <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <items>
                                     <navigationItem title="Map" id="Djl-pK-apy">
-                                        <barButtonItem key="leftBarButtonItem" title="Locations" id="tth-9O-JbC"/>
-                                        <barButtonItem key="rightBarButtonItem" title="User" id="V2c-5c-xo9"/>
+                                        <barButtonItem key="leftBarButtonItem" title="Locations" id="tth-9O-JbC">
+                                            <connections>
+                                                <action selector="showLocations" destination="0iT-Fk-Jtu" id="9aO-C5-GM2"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="User" id="V2c-5c-xo9">
+                                            <connections>
+                                                <action selector="showUser" destination="0iT-Fk-Jtu" id="ahv-6b-Ugd"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -521,6 +529,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" id="4xC-sD-OQh"/>
+                    <connections>
+                        <outlet property="mapView" destination="WtX-83-iQj" id="OAV-Eb-PXZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Guu-fd-yYh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

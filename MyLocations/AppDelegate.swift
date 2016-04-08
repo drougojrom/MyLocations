@@ -94,6 +94,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tabBarController = window!.rootViewController as! UITabBarController
         
         if let tabBarViewControllers = tabBarController.viewControllers {
+            
+            let mapViewController = tabBarViewControllers[2] as! MapViewController
+            mapViewController.managedObjectContext = managedObjectContext
+            
             let currentLocationViewController = tabBarViewControllers[0] as! CurrentLocationViewController
             
             let navigationController = tabBarViewControllers[1] as! UINavigationController
