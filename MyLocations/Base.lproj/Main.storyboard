@@ -188,6 +188,9 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7K1-xW-RaI">
+                                                    <rect key="frame" x="254" y="8" width="240" height="28"/>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="xVM-8I-f2R" firstAttribute="leading" secondItem="cej-UB-5sZ" secondAttribute="leadingMargin" id="SVd-ak-P8f"/>
@@ -335,6 +338,7 @@
                         <outlet property="categoryLabel" destination="dJi-lf-KGx" id="OaB-xA-elF"/>
                         <outlet property="dateLabel" destination="FCw-NQ-HnA" id="gGH-7R-P3i"/>
                         <outlet property="descriptionTextView" destination="HOD-aR-79e" id="p2H-hx-XjG"/>
+                        <outlet property="imageView" destination="7K1-xW-RaI" id="w0b-lv-yVR"/>
                         <outlet property="latitudeLabel" destination="Qxw-wI-Bqp" id="seA-lQ-teG"/>
                         <outlet property="longitudeLabel" destination="BIn-OO-ex6" id="FqT-Kc-wwn"/>
                     </connections>
