@@ -28,6 +28,9 @@ class MapViewController: UIViewController {
     
     @IBAction func showLocations(){
         
+        let region = regionForAnnotation(locations)
+        mapView.setRegion(region, animated: true)
+        
     }
     
     // MARK : func's
@@ -95,12 +98,63 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         
         updateLocation()
+        
+        if !locations.isEmpty {
+            showLocations()
+        }
     }
     
     
 }
 
 extension MapViewController : MKMapViewDelegate {
+    
+    // MARK : extension func's
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        // 1 - check if annotation is location object
+        guard annotation is Location else {
+            return nil
+        }
+        
+        // 2 - just like with cell in table, but with pins.
+        let identifier = "Location"
+        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as! MKPinAnnotationView!
+        
+        if annotationView == nil {
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            
+            // 3 - configure look an feel of pins
+            annotationView.enabled = true
+            annotationView.canShowCallout = true
+            annotationView.animatesDrop =  false
+            annotationView.pinTintColor = UIColor(red: 0.32, green: 0.82, blue: 0.4, alpha: 1)
+            
+            // 4 - button for location details
+            let rightButton = UIButton(type: .DetailDisclosure)
+            rightButton.addTarget(self,
+                                  action: Selector("ShowLocationDetails:"),
+                                  forControlEvents: .TouchUpInside)
+            annotationView.rightCalloutAccessoryView = rightButton
+        } else {
+            annotationView.annotation = annotation
+        }
+        
+        // 5 - obtain a reference to that detail disclosure button to see detailed view
+        let button = annotationView.rightCalloutAccessoryView as! UIButton
+        if let index = locations.indexOf(annotation as! Location) {
+            button.tag = index
+        }
+        return annotationView
+    }
+    
+    
+    
+    
+    
+    
+    
 
 
 }
