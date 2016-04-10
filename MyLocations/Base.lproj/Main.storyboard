@@ -188,9 +188,6 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7K1-xW-RaI">
-                                                    <rect key="frame" x="254" y="8" width="240" height="28"/>
-                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="xVM-8I-f2R" firstAttribute="leading" secondItem="cej-UB-5sZ" secondAttribute="leadingMargin" id="SVd-ak-P8f"/>
@@ -338,7 +335,6 @@
                         <outlet property="categoryLabel" destination="dJi-lf-KGx" id="OaB-xA-elF"/>
                         <outlet property="dateLabel" destination="FCw-NQ-HnA" id="gGH-7R-P3i"/>
                         <outlet property="descriptionTextView" destination="HOD-aR-79e" id="p2H-hx-XjG"/>
-                        <outlet property="imageView" destination="7K1-xW-RaI" id="w0b-lv-yVR"/>
                         <outlet property="latitudeLabel" destination="Qxw-wI-Bqp" id="seA-lQ-teG"/>
                         <outlet property="longitudeLabel" destination="BIn-OO-ex6" id="FqT-Kc-wwn"/>
                     </connections>
@@ -442,17 +438,17 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="75"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KWD-37-s6i" id="Ft9-bO-KDA">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="74.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ax6-73-XK8">
-                                            <rect key="frame" x="106" y="8" width="584" height="21"/>
+                                            <rect key="frame" x="8" y="8" width="584" height="21"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3HW-wx-6sr">
-                                            <rect key="frame" x="106" y="37" width="584" height="21"/>
+                                            <rect key="frame" x="8" y="37" width="584" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="Thz-rF-bQe"/>
                                             </constraints>
@@ -460,27 +456,19 @@
                                             <color key="textColor" red="0.46666666666666667" green="0.46666666666666667" blue="0.46666666666666667" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TfW-4e-wYB">
-                                            <rect key="frame" x="8" y="0.0" width="90" height="75"/>
-                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="Ax6-73-XK8" firstAttribute="leading" secondItem="3HW-wx-6sr" secondAttribute="leading" id="0nM-9L-XrU"/>
-                                        <constraint firstItem="TfW-4e-wYB" firstAttribute="top" secondItem="Ft9-bO-KDA" secondAttribute="top" id="92f-4a-ozA"/>
                                         <constraint firstItem="Ax6-73-XK8" firstAttribute="top" secondItem="Ft9-bO-KDA" secondAttribute="topMargin" id="KvT-BU-spS"/>
-                                        <constraint firstItem="Ax6-73-XK8" firstAttribute="leading" secondItem="Ft9-bO-KDA" secondAttribute="leadingMargin" constant="98" id="Mgj-1Z-gbp"/>
-                                        <constraint firstItem="Ax6-73-XK8" firstAttribute="leading" secondItem="TfW-4e-wYB" secondAttribute="trailing" constant="8" symbolic="YES" id="Pmk-d1-QTj"/>
+                                        <constraint firstItem="Ax6-73-XK8" firstAttribute="leading" secondItem="Ft9-bO-KDA" secondAttribute="leadingMargin" id="Mgj-1Z-gbp"/>
                                         <constraint firstItem="3HW-wx-6sr" firstAttribute="top" secondItem="Ax6-73-XK8" secondAttribute="bottom" constant="8" symbolic="YES" id="URN-cT-3kr"/>
-                                        <constraint firstItem="Ax6-73-XK8" firstAttribute="trailing" secondItem="Ft9-bO-KDA" secondAttribute="trailingMargin" constant="98" id="Y5f-JT-WHE"/>
+                                        <constraint firstItem="Ax6-73-XK8" firstAttribute="trailing" secondItem="Ft9-bO-KDA" secondAttribute="trailingMargin" id="Y5f-JT-WHE"/>
                                         <constraint firstItem="Ax6-73-XK8" firstAttribute="trailing" secondItem="3HW-wx-6sr" secondAttribute="trailing" id="hfb-q9-tMT"/>
-                                        <constraint firstItem="TfW-4e-wYB" firstAttribute="leading" secondItem="Ft9-bO-KDA" secondAttribute="leadingMargin" id="srP-IT-fJP"/>
-                                        <constraint firstItem="TfW-4e-wYB" firstAttribute="centerY" secondItem="Ft9-bO-KDA" secondAttribute="centerY" id="ubb-Ak-dj6"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="addressLabel" destination="3HW-wx-6sr" id="9T0-EK-dMv"/>
                                     <outlet property="descriptionLabel" destination="Ax6-73-XK8" id="ck1-QD-5Zb"/>
-                                    <outlet property="photoImageView" destination="TfW-4e-wYB" id="mkj-u7-ULD"/>
                                     <segue destination="OAZ-RS-JLE" kind="modal" identifier="EditLocation" id="7Zo-AM-A3j"/>
                                 </connections>
                             </tableViewCell>
@@ -575,7 +563,7 @@
         <image name="first" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7Zo-AM-A3j"/>
+        <segue reference="cd2-y6-FSh"/>
         <segue reference="KyV-rr-cX0"/>
     </inferredMetricsTieBreakers>
 </document>
