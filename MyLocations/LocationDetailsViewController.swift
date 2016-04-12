@@ -20,6 +20,8 @@ class LocationDetailsViewController: UITableViewController {
     @IBOutlet weak var longitudeLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var addPhotoLabel: UILabel!
     
     // MARK: var and let
     
@@ -40,7 +42,7 @@ class LocationDetailsViewController: UITableViewController {
         }
     }
     var descriptionText = ""
-    
+    var image: UIImage?
     // MARK: private var and let
     
     private let dateFormatter: NSDateFormatter = {
@@ -103,6 +105,15 @@ class LocationDetailsViewController: UITableViewController {
     }
     
     // MARK : func's
+    
+    // showImage
+    
+    func showImage(image: UIImage) {
+        imageView.image = image
+        imageView.hidden = false
+        imageView.frame = CGRect(x: 10, y: 10, width: 260, height: 260)
+        addPhotoLabel.hidden = true
+    }
     
     // hide keyboard on tableView
     func hideKeyboard(gestureRecognizer: UITapGestureRecognizer) {
@@ -209,6 +220,7 @@ class LocationDetailsViewController: UITableViewController {
         if indexPath.section == 0 && indexPath.row == 0 {
             descriptionTextView.becomeFirstResponder()
         } else if indexPath.section == 1 && indexPath.row == 0 {
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
             pickPhoto()
         }
     }
@@ -269,6 +281,12 @@ extension LocationDetailsViewController: UIImagePickerControllerDelegate, UINavi
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        
+        image = info[UIImagePickerControllerEditedImage] as? UIImage
+        if let image = image {
+            showImage(image)
+        }
+        
         dismissViewControllerAnimated(true, completion: nil)
     }
     

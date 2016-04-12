@@ -176,22 +176,31 @@
                             <tableViewSection id="ee5-CS-gXb">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="DNF-N0-CNy">
-                                        <rect key="frame" x="0.0" y="281.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="282" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DNF-N0-CNy" id="cej-UB-5sZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="567" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Add photo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xVM-8I-f2R">
-                                                    <rect key="frame" x="8" y="11" width="90" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add photo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xVM-8I-f2R">
+                                                    <rect key="frame" x="8" y="11" width="85" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IWC-aD-CGo">
+                                                    <rect key="frame" x="300" y="4" width="240" height="36"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="240" id="dJK-n6-akM"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="IWC-aD-CGo" firstAttribute="top" secondItem="cej-UB-5sZ" secondAttribute="topMargin" constant="-4" id="DGg-Xd-CIu"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="IWC-aD-CGo" secondAttribute="trailing" constant="19" id="Pnq-qu-5yL"/>
                                                 <constraint firstItem="xVM-8I-f2R" firstAttribute="leading" secondItem="cej-UB-5sZ" secondAttribute="leadingMargin" id="SVd-ak-P8f"/>
                                                 <constraint firstItem="xVM-8I-f2R" firstAttribute="centerY" secondItem="cej-UB-5sZ" secondAttribute="centerY" id="eTa-fK-zCW"/>
+                                                <constraint firstItem="IWC-aD-CGo" firstAttribute="centerY" secondItem="xVM-8I-f2R" secondAttribute="centerY" id="iW6-GH-DAf"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -331,10 +340,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addPhotoLabel" destination="xVM-8I-f2R" id="El5-vo-ANp"/>
                         <outlet property="addressLabel" destination="W0U-Av-9lX" id="L7g-wD-gQT"/>
                         <outlet property="categoryLabel" destination="dJi-lf-KGx" id="OaB-xA-elF"/>
                         <outlet property="dateLabel" destination="FCw-NQ-HnA" id="gGH-7R-P3i"/>
                         <outlet property="descriptionTextView" destination="HOD-aR-79e" id="p2H-hx-XjG"/>
+                        <outlet property="imageView" destination="IWC-aD-CGo" id="n1V-hv-wep"/>
                         <outlet property="latitudeLabel" destination="Qxw-wI-Bqp" id="seA-lQ-teG"/>
                         <outlet property="longitudeLabel" destination="BIn-OO-ex6" id="FqT-Kc-wwn"/>
                     </connections>
@@ -563,7 +574,7 @@
         <image name="first" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cd2-y6-FSh"/>
+        <segue reference="7Zo-AM-A3j"/>
         <segue reference="KyV-rr-cX0"/>
     </inferredMetricsTieBreakers>
 </document>
