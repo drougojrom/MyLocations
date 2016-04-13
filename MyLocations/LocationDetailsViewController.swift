@@ -78,6 +78,7 @@ class LocationDetailsViewController: UITableViewController {
             hudView.text = "Tagged"
         // 1 - create a new location object from CoreData
             location = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: managedObjectContext) as! Location
+            location.photoID = nil
         
         }
         
@@ -88,6 +89,22 @@ class LocationDetailsViewController: UITableViewController {
         location.longitude = coordinate.longitude
         location.placemark = placemark
         location.date = date
+        
+        if let image = image {
+            // 1 - need new ID for a location without a photo, otherwise, keep the same photo
+            if !location.hasPhoto {
+                location.photoID = Location.nextPhotoID()
+            }
+            // 2 - converting to jpg
+            if let data = UIImageJPEGRepresentation(image, 0.5) {
+                // 3 - save NSData object
+                do {
+                    try data.writeToFile(location.photoPath, options: .DataWritingAtomic)
+                } catch {
+                    print("Error writting data \(error)")
+                }
+            }
+        }
         
         // 3 - save new modified object
         
@@ -191,6 +208,9 @@ class LocationDetailsViewController: UITableViewController {
         super.viewDidLoad()
         if let location = locationToEdit {
             title = "Edit Location"
+            if let image = location.photoImage {
+                showImage(image)
+            }
         }
         
         descriptionTextView.text = descriptionText
