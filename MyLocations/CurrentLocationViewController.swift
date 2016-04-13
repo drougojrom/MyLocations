@@ -21,6 +21,9 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     @IBOutlet weak var tagButton: UIButton!
     @IBOutlet weak var getButton: UIButton!
     
+    @IBOutlet weak var latitudeTextLabel: UILabel!
+    @IBOutlet weak var longitudeTextLabel: UILabel!
+    
     // var and let
     let locationManager = CLLocationManager()
     var location: CLLocation?
@@ -57,7 +60,9 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         configureGetButton()
         
     }
-    // MARK : - update labels
+    
+    // MARK : update labels
+    
     func updateLabels(){
         if let location = location {
             latitudeLabel.text = String(format: "%.8f", location.coordinate.latitude)
@@ -75,6 +80,9 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             } else {
                 addressLabel.text = "No address found"
             }
+            
+            latitudeTextLabel.hidden = false
+            longitudeTextLabel.hidden = false
             
         } else {
             latitudeLabel.text = ""
@@ -100,42 +108,25 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
                 statusMessage = "Tap 'Get Location' to start"
             }
             
+            latitudeTextLabel.hidden = true
+            longitudeTextLabel.hidden = true
             messageLabel.text = statusMessage
         } 
     }
     
     func stringFromPlacemark(placemark: CLPlacemark) -> String {
-        // 1 - create a var for first line text
-        var line1 = " "
-        
-        // 2 - additional to name
-        if let s = placemark.subThoroughfare {
-            line1 += s + " "
-        }
-        
-        // 3 - name
-        if let s = placemark.thoroughfare {
-            line1 += s
-        }
-        
-        // 4 - the same as 1 - 3
+        var line1 = ""
+        line1.addText(placemark.subThoroughfare)
+        line1.addText(placemark.thoroughfare, withSeparator: " ")
         
         var line2 = ""
+        line2.addText(placemark.locality)
+        line2.addText(placemark.administrativeArea, withSeparator: " ")
+        line2.addText(placemark.postalCode, withSeparator: " ")
         
-        if let s = placemark.locality {
-            line2 += s + " "
-        }
+        line1.addText(line2, withSeparator: "\n")
         
-        if let s = placemark.administrativeArea {
-            line2 += s + " "
-        }
-        
-        if let s = placemark.postalCode {
-            line2 += s
-        }
-        
-        // 5 - add them together
-        return line1 + "\n" + line2
+        return line1
     }
     
     
