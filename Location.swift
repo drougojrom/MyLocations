@@ -31,4 +31,13 @@ class Location: NSManagedObject, MKAnnotation {
         return category
     }
     
+    var hasPhoto: Bool {
+        return photoID != nil
+    }
+    
+    var photoPath: String {
+        assert(photoID != nil, "No photo ID set")
+        let filename = "Photo-\(photoID!.integerValue).jpg"
+        return (applicationDocumentDirectory as NSString).stringByAppendingPathComponent(filename)
+    }
 }

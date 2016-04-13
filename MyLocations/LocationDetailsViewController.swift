@@ -43,6 +43,15 @@ class LocationDetailsViewController: UITableViewController {
     }
     var descriptionText = ""
     var image: UIImage?
+    var observer: AnyObject!
+    
+    deinit {
+        print("deinit \(self)")
+        
+        NSNotificationCenter.defaultCenter().removeObserver(observer)
+    }
+    
+    
     // MARK: private var and let
     
     private let dateFormatter: NSDateFormatter = {
@@ -106,6 +115,20 @@ class LocationDetailsViewController: UITableViewController {
     
     // MARK : func's
     
+    // listenForBackground
+    // adds observer for NSNotification and call closure
+    
+    func listenForBackgroundNotification(){
+        observer = NSNotificationCenter.defaultCenter().addObserverForName(UIApplicationDidEnterBackgroundNotification, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] _ in
+            if let strongSelf = self {
+            if strongSelf.presentedViewController != nil {
+                strongSelf.dismissViewControllerAnimated(false, completion: nil)
+                }
+            strongSelf.descriptionTextView.resignFirstResponder()
+            }
+        }
+    }
+    
     // showImage
     
     func showImage(image: UIImage) {
@@ -166,7 +189,6 @@ class LocationDetailsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         if let location = locationToEdit {
             title = "Edit Location"
         }
@@ -188,29 +210,24 @@ class LocationDetailsViewController: UITableViewController {
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("hideKeyboard:"))
         gestureRecognizer.cancelsTouchesInView = false
         tableView.addGestureRecognizer(gestureRecognizer)
-        
+        listenForBackgroundNotification()
     }
     
     // MARK : UITablewViewDelegate section
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.section == 0 && indexPath.row == 0 {
+        switch (indexPath.section, indexPath.row){
+        case (0,0):
             return 88
-        } else if indexPath.section == 1 {
-        
-            if imageView.hidden {
-                return 44
-            } else {
-                return 280
-            }
-            
-        } else if indexPath.section == 2 && indexPath.row == 2 {
-            addressLabel.frame.size = CGSize(width: view.bounds.size.width - 115, height: 10000)
+        case (1, _):
+            return imageView.hidden ? 44 : 280
+        case (2, 2):
+            addressLabel.frame.size = CGSize(width: view.bounds.width - 115, height: 10000)
             addressLabel.sizeToFit()
             addressLabel.frame.origin.x = view.bounds.size.width - addressLabel.frame.size.width - 15
             return addressLabel.frame.size.height + 20
             
-        } else {
+        default:
             return 44
         }
     }
