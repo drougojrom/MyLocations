@@ -22,6 +22,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     @IBOutlet weak var getButton: UIButton!
     @IBOutlet weak var latitudeTextLabel: UILabel!
     @IBOutlet weak var longitudeTextLabel: UILabel!
+    @IBOutlet weak var containerView: UIView!
     
     // var and let
     let locationManager = CLLocationManager()
@@ -37,9 +38,38 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     
     var managedObjectContext: NSManagedObjectContext!
     
+    var logoVisible = false
+    
+    lazy var logoButton: UIButton = {
+        let button = UIButton(type: .Custom)
+        button.setBackgroundImage(UIImage(named: "Logo"), forState: .Normal)
+        button.sizeToFit()
+        button.addTarget(self, action: Selector("getLocation"), forControlEvents: .TouchUpInside)
+        button.center.x = CGRectGetMidX(self.view.bounds)
+        button.center.y = 220
+        return button
+    }()
+    
+    func showLogoView(){
+        if !logoVisible {
+            logoVisible = true
+            containerView.hidden = true
+            view.addSubview(logoButton)
+        }
+    }
+    
+    func hideLogoView(){
+        logoVisible = false
+        containerView.hidden = false
+        logoButton.removeFromSuperview()
+    }
+    
     @IBAction func getLocation(){
         
         let authStatus = CLLocationManager.authorizationStatus()
+        if logoVisible {
+            hideLogoView()
+        }
         
         if authStatus == .Denied || authStatus == .Restricted {
             showLocationServiceDeniedAlert()
@@ -102,7 +132,8 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             } else if updatingLocation {
                 statusMessage = "Searching..."
             } else {
-                statusMessage = "Tap 'Get Location' to start"
+                statusMessage = ""
+                showLogoView()
             }
             
             messageLabel.text = statusMessage
