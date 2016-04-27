@@ -9,7 +9,6 @@
 import UIKit
 import CoreLocation
 import CoreData
-import QuartzCore
 
 class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate {
     
@@ -21,11 +20,6 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var tagButton: UIButton!
     @IBOutlet weak var getButton: UIButton!
-    
-    @IBOutlet weak var latitudeTextLabel: UILabel!
-    @IBOutlet weak var longitudeTextLabel: UILabel!
-    
-    @IBOutlet weak var containerView: UIView!
     
     // var and let
     let locationManager = CLLocationManager()
@@ -41,17 +35,6 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     
     var managedObjectContext: NSManagedObjectContext!
     
-    var logoVisible = false
-    lazy var logoButton: UIButton = {
-        let button = UIButton(type: .Custom)
-        button.setBackgroundImage(UIImage(named:"Logo"), forState: .Normal)
-        button.sizeToFit()
-        button.addTarget(self, action: Selector("getLocation"), forControlEvents: .TouchUpInside)
-        button.center.x = CGRectGetMidX(self.view.bounds)
-        button.center.y = 220
-        return button
-    }()
-    
     @IBAction func getLocation(){
         
         let authStatus = CLLocationManager.authorizationStatus()
@@ -59,10 +42,6 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         if authStatus == .Denied || authStatus == .Restricted {
             showLocationServiceDeniedAlert()
             return
-        }
-        
-        if logoVisible {
-            hideLogoView()
         }
         
         if updatingLocation {
@@ -78,9 +57,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         configureGetButton()
         
     }
-    
-    // MARK : update labels
-    
+    // MARK : - update labels
     func updateLabels(){
         if let location = location {
             latitudeLabel.text = String(format: "%.8f", location.coordinate.latitude)
@@ -99,16 +76,12 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
                 addressLabel.text = "No address found"
             }
             
-            latitudeTextLabel.hidden = false
-            longitudeTextLabel.hidden = false
-            
         } else {
             latitudeLabel.text = ""
             longitudeLabel.text = ""
             
             tagButton.hidden = true
-            messageLabel.text = ""
-            showLogoView()
+            messageLabel.text = "Tap 'Get Location' to start"
             
             // show that app is trying to obtain a location fix
             
@@ -127,25 +100,42 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
                 statusMessage = "Tap 'Get Location' to start"
             }
             
-            latitudeTextLabel.hidden = true
-            longitudeTextLabel.hidden = true
             messageLabel.text = statusMessage
         } 
     }
     
     func stringFromPlacemark(placemark: CLPlacemark) -> String {
-        var line1 = ""
-        line1.addText(placemark.subThoroughfare)
-        line1.addText(placemark.thoroughfare, withSeparator: " ")
+        // 1 - create a var for first line text
+        var line1 = " "
+        
+        // 2 - additional to name
+        if let s = placemark.subThoroughfare {
+            line1 += s + " "
+        }
+        
+        // 3 - name
+        if let s = placemark.thoroughfare {
+            line1 += s
+        }
+        
+        // 4 - the same as 1 - 3
         
         var line2 = ""
-        line2.addText(placemark.locality)
-        line2.addText(placemark.administrativeArea, withSeparator: " ")
-        line2.addText(placemark.postalCode, withSeparator: " ")
         
-        line1.addText(line2, withSeparator: "\n")
+        if let s = placemark.locality {
+            line2 += s + " "
+        }
         
-        return line1
+        if let s = placemark.administrativeArea {
+            line2 += s + " "
+        }
+        
+        if let s = placemark.postalCode {
+            line2 += s
+        }
+        
+        // 5 - add them together
+        return line1 + "\n" + line2
     }
     
     
@@ -181,66 +171,6 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
                 timer.invalidate()
             }
         }
-    }
-    
-    func showLogoView(){
-        if !logoVisible {
-            logoVisible = true
-            containerView.hidden = true
-            view.addSubview(logoButton)
-        }
-    }
-    
-    func hideLogoView(){
-        
-        if !logoVisible { return }
-        
-        logoVisible = false
-        containerView.hidden = false
-        
-        containerView.center.x = view.bounds.size.width * 2
-        containerView.center.y = 40 + containerView.bounds.size.height / 2
-        
-        let centerX = CGRectGetMidX(view.bounds)
-        let panelMover = CABasicAnimation(keyPath: "position")
-        panelMover.removedOnCompletion = false
-        panelMover.fillMode = kCAFillModeForwards
-        panelMover.duration = 0.6
-        panelMover.fromValue = NSValue(CGPoint: containerView.center)
-        panelMover.toValue = NSValue(CGPoint: CGPoint(x: centerX, y: containerView.center.y))
-        panelMover.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-        panelMover.delegate = self
-        containerView.layer.addAnimation(panelMover, forKey: "panelMover")
-        
-        let logoMover = CABasicAnimation(keyPath: "position")
-        logoMover.removedOnCompletion = false
-        logoMover.fillMode = kCAFillModeForwards
-        logoMover.duration = 0.5
-        logoMover.fromValue = NSValue(CGPoint: logoButton.center)
-        logoMover.toValue = NSValue(CGPoint: CGPoint(x: -centerX, y: logoButton.center.y))
-        logoMover.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-        
-        logoButton.layer.addAnimation(logoMover, forKey: "logoMover")
-        
-        let logoRotation = CABasicAnimation(keyPath: "transform.rotation.z")
-        logoRotation.removedOnCompletion = false
-        logoRotation.fillMode = kCAFillModeForwards
-        logoRotation.duration = 0.5
-        logoRotation.fromValue = 0.0
-        logoRotation.toValue = -2 * M_PI
-        logoRotation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-        
-        logoButton.layer.addAnimation(logoRotation, forKey: "logoRotation")
-        
-    }
-    
-    override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
-        containerView.layer.removeAllAnimations()
-        containerView.center.x = view.bounds.size.width / 2
-        containerView.center.y = 40 + containerView.bounds.size.height / 2
-        
-        logoButton.layer.removeAllAnimations()
-        logoButton.removeFromSuperview()
     }
 
     override func viewDidLoad() {
