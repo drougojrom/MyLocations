@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 import CoreData
 import QuartzCore
+import AudioToolbox
 
 class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate {
     
@@ -50,6 +51,8 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         button.center.y = 220
         return button
     }()
+    
+    var soundID: SystemSoundID = 0
     
     func showLogoView(){
         if !logoVisible {
@@ -245,6 +248,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         // Do any additional setup after loading the view, typically from a nib.
         
         updateLabels()
+        loadSoundEffect("Sound.caf")
         configureGetButton()
     }
 
@@ -313,6 +317,10 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
                 
                 self.lastGeocodingError = error
                 if error == nil, let p = placemarks where !p.isEmpty {
+                    if self.placemark == nil {
+                        print("First time!")
+                        self.playSoundEffect()
+                    }
                     self.placemark = p.last!
                 } else {
                     self.placemark = nil
@@ -351,11 +359,28 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     // get-button func
     
     func configureGetButton(){
+       
+        let spinnerTag = 1000
+        
         if updatingLocation {
             getButton.setTitle("Stop", forState: .Normal)
+            
+            if view.viewWithTag(spinnerTag) == nil {
+                let spinner =  UIActivityIndicatorView(activityIndicatorStyle: .White)
+                spinner.center = messageLabel.center
+                spinner.center.y += spinner.bounds.size.height/2 + 15
+                spinner.startAnimating()
+                spinner.tag = spinnerTag
+                containerView.addSubview(spinner)
+            }
         } else {
             getButton.setTitle("Get My Location", forState: .Normal)
+            if let spinner = view.viewWithTag(spinnerTag) {
+                spinner.removeFromSuperview()
+            }
         }
+        
+        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -379,5 +404,26 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         }
         return result
     }
+    
+    // MARK : - Sound Effect
+    
+    func loadSoundEffect(name: String) {
+        if let path = NSBundle.mainBundle().pathForResource(name, ofType: nil){
+            let fileURL = NSURL.fileURLWithPath(path, isDirectory: false)
+            let error = AudioServicesCreateSystemSoundID(fileURL, &soundID)
+            if error != kAudioServicesNoError {
+                print("error core \(error) loading sound on path \(path)")
+            }
+        }
+    }
+    
+    func unloadSoundEffect(){
+        AudioServicesDisposeSystemSoundID(soundID)
+    }
+    
+    func playSoundEffect(){
+        AudioServicesPlaySystemSound(soundID)
+    }
+    
 }
 

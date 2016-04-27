@@ -13,6 +13,7 @@
 		30480B851CD0E83000E17F82 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30480B841CD0E83000E17F82 /* MyTabBarController.swift */; };
 		30480B871CD0E8B500E17F82 /* MyNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30480B861CD0E8B500E17F82 /* MyNavigationController.swift */; };
 		30480B891CD0E95200E17F82 /* MyImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30480B881CD0E95200E17F82 /* MyImagePickerController.swift */; };
+		30480B8C1CD11E6900E17F82 /* Sound.caf in Resources */ = {isa = PBXBuildFile; fileRef = 30480B8B1CD11E6900E17F82 /* Sound.caf */; };
 		3054CEB91CB3C17400F7B431 /* HudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3054CEB81CB3C17400F7B431 /* HudView.swift */; };
 		3054CEBB1CB3E07D00F7B431 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3054CEBA1CB3E07D00F7B431 /* Functions.swift */; };
 		3054CEBE1CB3EC1200F7B431 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3054CEBC1CB3EC1200F7B431 /* DataModel.xcdatamodeld */; };
@@ -37,6 +38,7 @@
 		30480B841CD0E83000E17F82 /* MyTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 		30480B861CD0E8B500E17F82 /* MyNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyNavigationController.swift; sourceTree = "<group>"; };
 		30480B881CD0E95200E17F82 /* MyImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyImagePickerController.swift; sourceTree = "<group>"; };
+		30480B8B1CD11E6900E17F82 /* Sound.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Sound.caf; sourceTree = "<group>"; };
 		3054CEB81CB3C17400F7B431 /* HudView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HudView.swift; sourceTree = "<group>"; };
 		3054CEBA1CB3E07D00F7B431 /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		3054CEBD1CB3EC1200F7B431 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -68,9 +70,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		30480B8A1CD11E6900E17F82 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				30480B8B1CD11E6900E17F82 /* Sound.caf */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
 		30A3A3DD1CAE640200B0DB5B = {
 			isa = PBXGroup;
 			children = (
+				30480B8A1CD11E6900E17F82 /* Sound */,
 				30DDA5C91CB68ECE008B9D9D /* MapKit.framework */,
 				30A3A3E81CAE640200B0DB5B /* MyLocations */,
 				30A3A3E71CAE640200B0DB5B /* Products */,
@@ -174,6 +185,7 @@
 			files = (
 				30A3A3F61CAE640300B0DB5B /* LaunchScreen.storyboard in Resources */,
 				30A3A3F31CAE640300B0DB5B /* Assets.xcassets in Resources */,
+				30480B8C1CD11E6900E17F82 /* Sound.caf in Resources */,
 				30A3A3F11CAE640300B0DB5B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
