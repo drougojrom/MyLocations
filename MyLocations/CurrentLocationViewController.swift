@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  CurrentLocationViewController.swift
 //  MyLocations
 //
 //  Created by Roman Ustiantcev on 01/04/16.
@@ -105,37 +105,17 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     }
     
     func stringFromPlacemark(placemark: CLPlacemark) -> String {
-        // 1 - create a var for first line text
-        var line1 = " "
         
-        // 2 - additional to name
-        if let s = placemark.subThoroughfare {
-            line1 += s + " "
-        }
+        var line = ""
+        line.addText(placemark.subThoroughfare)
+        line.addText(placemark.thoroughfare, withSeparator: " ")
+        line.addText(placemark.locality, withSeparator: ", ")
+        line.addText(placemark.administrativeArea, withSeparator: ", ")
+        line.addText(placemark.postalCode, withSeparator: " ")
+        line.addText(placemark.country, withSeparator: ", ")
         
-        // 3 - name
-        if let s = placemark.thoroughfare {
-            line1 += s
-        }
+        return line
         
-        // 4 - the same as 1 - 3
-        
-        var line2 = ""
-        
-        if let s = placemark.locality {
-            line2 += s + " "
-        }
-        
-        if let s = placemark.administrativeArea {
-            line2 += s + " "
-        }
-        
-        if let s = placemark.postalCode {
-            line2 += s
-        }
-        
-        // 5 - add them together
-        return line1 + "\n" + line2
     }
     
     
@@ -300,6 +280,17 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             controller.placemark = placemark
             controller.managedObjectContext = managedObjectContext
         }
+    }
+    
+    func addText(text: String?, toLine line: String, withSeparator separator: String) -> String {
+        var result = line
+        if let text = text {
+            if !line.isEmpty {
+                result += separator
+            }
+            result += text
+        }
+        return result
     }
 }
 

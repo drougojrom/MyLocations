@@ -155,6 +155,7 @@ extension MapViewController : MKMapViewDelegate {
             annotationView.canShowCallout = true
             annotationView.animatesDrop =  false
             annotationView.pinTintColor = UIColor(red: 0.32, green: 0.82, blue: 0.4, alpha: 1)
+            annotationView.tintColor = UIColor(white: 0.0, alpha: 0.5)
             
             // 4 - button for location details
             let rightButton = UIButton(type: .DetailDisclosure)

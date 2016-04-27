@@ -306,8 +306,9 @@ extension LocationDetailsViewController: UIImagePickerControllerDelegate, UINavi
     // MARK: func for camera pick
     
     func takePhotoWithCamera(){
-        let imagePicker = UIImagePickerController()
+        let imagePicker = MyImagePickerController()
         imagePicker.sourceType = .Camera
+        imagePicker.view.tintColor = view.tintColor
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
         presentViewController(imagePicker, animated: true, completion: nil)
@@ -316,8 +317,9 @@ extension LocationDetailsViewController: UIImagePickerControllerDelegate, UINavi
     // MARK: func for library pick
     
     func choosePhotoFromLibrary(){
-        let imagePicker = UIImagePickerController()
+        let imagePicker = MyImagePickerController()
         imagePicker.sourceType = .PhotoLibrary
+        imagePicker.view.tintColor = view.tintColor
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
         presentViewController(imagePicker, animated: true, completion: nil)
