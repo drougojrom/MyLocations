@@ -104,7 +104,9 @@
                         <outlet property="addressLabel" destination="DLJ-f3-i1s" id="GaO-Gk-y8h"/>
                         <outlet property="getButton" destination="fIF-JF-Py1" id="WcD-RN-Ssd"/>
                         <outlet property="latitudeLabel" destination="CcV-YI-byS" id="X96-wM-Gv1"/>
+                        <outlet property="latitudeTextLabel" destination="f3e-RN-Cye" id="NjZ-Qw-JUy"/>
                         <outlet property="longitudeLabel" destination="cJy-VH-C1e" id="8AE-jF-rXP"/>
+                        <outlet property="longitudeTextLabel" destination="F5r-No-uXp" id="5L9-AT-dMC"/>
                         <outlet property="messageLabel" destination="neK-Yf-VBJ" id="sEu-sV-H0M"/>
                         <outlet property="tagButton" destination="bfM-fb-woS" id="gCv-jv-ZWX"/>
                     </connections>
@@ -594,7 +596,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="KyV-rr-cX0"/>
-        <segue reference="DEK-j2-SbX"/>
+        <segue reference="cd2-y6-FSh"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.93333333333333335" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
 </document>
